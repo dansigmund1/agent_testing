@@ -1,6 +1,7 @@
 import os
 import json
 import psycopg2
+import sqlite3
 import argparse
 
 class CheckSetup:
@@ -10,12 +11,12 @@ class CheckSetup:
     def db_connect(self):
         with open("files/db.json") as db_f:
             dbs = json.load(db_f)
-        print(f"Databases: {dbs}")
+        return dbs
     
     def get_workflows(self):
         with open("files/workflows.json") as wf_f:
             wfs = json.load(wf_f)
-        print(f"Workflows: {wfs}")
+        return wfs
     
     def generate_report(self, dbs, wfs):
         for db in dbs:

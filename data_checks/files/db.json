@@ -1,10 +1,17 @@
 {
-    "postgres":{"test_db":{
-        "host":"",
-        "port":"",
-        "database":"",
-        "user":"",
-        "password":""
+    "postgres":{
+        "test_db":{
+            "host":"",
+            "port":"",
+            "database":"",
+            "user":"",
+            "password":""
+        }
+    },
+    "sqlite3":{
+        "DBeaver Sample Database (SQLlite)":{
+            "db_name":"DBeaver Sample Database (SQLlite)",
+            "path":"%APPDATA%\\DBeaverData\\workspace6\\.metadata\\sample-database-sqlite-1\\Chinook.db"
+        }
     }
-}
 }
