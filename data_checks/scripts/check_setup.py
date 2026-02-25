@@ -27,8 +27,8 @@ class CheckSetup:
             for wf in wfs:
                 print(f"DB: {db}")
                 print(f"WF: {wf}")
-        return
-
+        return dbs, wfs
+    
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--date', help="Date to check", required=True)

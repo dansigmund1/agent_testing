@@ -1,26 +1,18 @@
-from flask import Flask, jsonify
-import subprocess
+from flask import Flask, jsonify, render_template, request
+from scripts.check_setup import CheckSetup
 
 app = Flask(__name__)
 
-@app.route('/run-script', methods=['POST'])
+@app.route('/')
+def home():
+    return render_template("home.html")
+
+@app.route('/run-checks', methods=['POST'])
 def run_script():
-    try:
-        result = subprocess.run(
-            ['python', 'scripts/check_setup.py'],
-            capture_output=True,
-            text=True,
-            timeout=30
-        )
-        return jsonify({
-            'status': 'success',
-            'output': result.stdout,
-            'errors': result.stderr
-        })
-    except subprocess.TimeoutExpired:
-        return jsonify({'status': 'error', 'message': 'Script timed out'}), 500
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
+    cs = CheckSetup()
+    dbs = cs.db_connect()
+    wfs = cs.get_workflows()
+    return cs.generate_report(dbs, wfs)
 
 if __name__ == '__main__':
     app.run(debug=True)
